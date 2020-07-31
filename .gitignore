@@ -1,0 +1,13 @@
+
+# Assets folder
+Assets
+# .vscode preferences
+.vscode
+# stock readme
+README.md
+# installation files
+node_modules
+
+#Misc
+./DS_Store
+
