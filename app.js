@@ -45,7 +45,7 @@ const empIdArray = [];
     
     ]).then(function(answers){
    
-         const manager = new Manager(answers.managerName ,answers.managerId, answers.managerEmail, answers.managerNo )
+         const manager = new Manager(answers.ManagerName ,answers.managerId, answers.managerEmail, answers.managerNo )
          employee.push(manager);
          empIdArray.push(answers.managerId);
          Teamfn();
@@ -126,12 +126,11 @@ const empIdArray = [];
               type: "input",
               message: "Engineer's Github Username?",
               name: "engineerGithub",
-              validate: gitHubValidation
            },
           ]).then(function(answers){
             const engineer = new Engineer(answers.engineerName ,answers.engineerId, answers.engineerEmail, answers.engineerGithub )
-            arr.push(engineer);
-            idArr.push(answers.engineerId);
+            employee.push(engineer);
+            empIdArray.push(answers.engineerId);
             Teamfn();
   
            }) .catch(function(err) {
@@ -170,21 +169,21 @@ const empIdArray = [];
           ]).then(function(answers){
             const intern = new Intern(answers.internName ,answers.internId, answers.internEmail, answers.internSchool )
   
-            arr.push(intern);
-            idArr.push(answers.internId);
+            employee.push(intern);
+            empIdArray.push(answers.internId);
             Teamfn() 
            }) .catch(function(err) {
              console.log(err);
        });
       }
 
-    //   function output(){
-    //     fs.writeFileSync(outputPath,  render(arr), function(err) {
-    //       if (err) {
-    //         return console.log(err);
-    //       }
-    //     });
-    //   }
+      function Defaultfn(){
+        fs.writeFileSync(outputPath,  render(employee), function(err) {
+          if (err) {
+            return console.log(err);
+          }
+        });
+      }
 
       //-----------------the following validation system is credited to Yakini-------------
       function answerValidation(value){
@@ -197,7 +196,7 @@ const empIdArray = [];
     //  console.log(pass);
       if (pass) {
       
-          if(idArr.includes(value)){
+          if(empIdArray.includes(value)){
             return "Please select different ID..Already in Use!!";
           }else{ 
             return true;
@@ -227,18 +226,6 @@ const empIdArray = [];
     }
 
     //To validate the GitHub account. If not valid, return 'Invalid user message'
-   async function gitHubValidation(value){
- 
-      const queryUrl = `https://api.github.com/users/${value}`;
-      try{
-       const response = await axios.get(queryUrl);
-        if(response.status === 200){
-          return true;
-        }
-      }catch (error) {
-        return `Invalid User`;
-        
-      };
-      }
+
     
       Managerfn();
