@@ -99,3 +99,41 @@ const empIdArray = [];
          console.log(err);
        });
      }
+
+     function Engineerfn(){
+         
+        inquirer.prompt([
+          {
+             type: "input",
+             message: "Engineer's Name?",
+             name: "engineerName",
+             validate: answerValidation
+          },
+          {
+              type: "input",
+              message: "Engineer's Id?",
+              name: "engineerId",
+              validate: idValidation
+           },
+           {
+              type: "input",
+              message: "Engineer's Email?",
+              name: "engineerEmail",
+              validate: emailValidation
+           },
+           {
+              type: "input",
+              message: "Engineer's Github Username?",
+              name: "engineerGithub",
+              validate: gitHubValidation
+           },
+          ]).then(function(answers){
+            const engineer = new Engineer(answers.engineerName ,answers.engineerId, answers.engineerEmail, answers.engineerGithub )
+            arr.push(engineer);
+            idArr.push(answers.engineerId);
+            Teamfn();
+  
+           }) .catch(function(err) {
+         console.log(err);
+       });
+      }
