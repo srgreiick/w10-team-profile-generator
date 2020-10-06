@@ -13,10 +13,10 @@ This application sets out to give the end user an easy way to create lists for t
 - [License](#license)
 - [Questions](#questions)  
 ## Media
-![Screenshot](\Assets\terminal.png)  
+![Screenshot](Assets\terminal.png)  
 How it should look when using the program,
 _________________________________________________________
-![Screenshot](\Assets\team.png)  
+![Screenshot](Assets\team.png)  
 Finished product
 ## Installation  
 Simply clone or download the repository and run the command $npm install
