@@ -21,24 +21,24 @@ const empIdArray = [];
       {
         type: "input",
         name: "ManagerName",
-        message: "What is your Manager name?",
+        message: "Manager name?",
         validate: answerValidation
       },
       {
         type: "input",
-        message: "What is your Manager Id?",
+        message: "Manager Id?",
         name: "managerId",
         validate: idValidation
       },
       {
         type: "input",
-        message: "What is your Manager's email?",
+        message: "Manager's email?",
         name: "managerEmail",
         validate: emailValidation
       },
       {
         type: "input",
-        message: "What is your Manager's office number?",
+        message: "Manager's office number?",
         name: "managerNo",
         validate: phNoValidation
 
@@ -101,7 +101,7 @@ const empIdArray = [];
      }
 
      function Engineerfn(){
-         
+
         inquirer.prompt([
           {
              type: "input",
@@ -135,5 +135,44 @@ const empIdArray = [];
   
            }) .catch(function(err) {
          console.log(err);
+       });
+      }
+
+      function Internfn(){
+          
+        inquirer.prompt([
+          {
+             type: "input",
+             message: "Intern's Name?",
+             name: "internName",
+             validate: answerValidation
+          },
+          {
+              type: "input",
+              message: "Intern's Id?",
+              name: "internId",
+              validate: idValidation
+           },
+           {
+              type: "input",
+              message: "Intern's Email?",
+              name: "internEmail",
+              validate: emailValidation
+           },
+           {
+              type: "input",
+              message: "Intern's School?",
+              name: "internSchool",
+              validate: answerValidation
+           },
+          
+          ]).then(function(answers){
+            const intern = new Intern(answers.internName ,answers.internId, answers.internEmail, answers.internSchool )
+  
+            arr.push(intern);
+            idArr.push(answers.internId);
+            Teamfn() 
+           }) .catch(function(err) {
+             console.log(err);
        });
       }
