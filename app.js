@@ -5,7 +5,7 @@ const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
 
-const OUTPUT_DIR = path.resolve(__dirname, "output");
+const OUTPUT_DIR = path.resolve(__dirname, "teamOutput");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/newRenderer");
 
@@ -55,3 +55,47 @@ const empIdArray = [];
       console.log(err);
     });
   }
+
+
+  function Teamfn() {
+    if(arr.length >=4){
+      return  Defaultfn();
+    }
+       inquirer.prompt([
+       {
+         type: "list",
+         message: "What type of team you would like to add?",
+         name: "select",
+         choices: [
+           "Engineer",
+           "Intern",
+           "Done"
+         ]
+       }
+       
+       ]).then(teamChoice => {
+      
+      
+         switch(teamChoice.choice){
+           case `Engineer`:
+             Engineerfn();
+            
+             break;
+            
+           case `Intern`:
+           
+             Internfn();
+            
+             break;
+ 
+          default:
+             Defaultfn();
+             break;
+ 
+           }
+         
+         })
+         .catch(function(err) {
+         console.log(err);
+       });
+     }
