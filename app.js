@@ -7,7 +7,6 @@ const fs = require("fs");
 
 const OUTPUT_DIR = path.resolve(__dirname, "teamOutput");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
-const render = require("./lib/newRenderer");
 
 //Thank you Dilan and Yakini, I couldn't have done it without your help
 const render = require("./lib/htmlRenderer");
@@ -58,18 +57,19 @@ const empIdArray = [];
 
 
   function Teamfn() {
-    if(arr.length >=4){
+    if(employee.length >=4){
+     console.log(`Thank you for building your team`);
       return  Defaultfn();
     }
        inquirer.prompt([
        {
          type: "list",
-         message: "What type of team you would like to add?",
-         name: "select",
+         message: "Which type of team you would like to add?",
+         name: "choice",
          choices: [
            "Engineer",
            "Intern",
-           "Done"
+           "No more team members"
          ]
        }
        
@@ -89,6 +89,7 @@ const empIdArray = [];
              break;
  
           default:
+             console.log(`Thank you for building your team`);
              Defaultfn();
              break;
  
@@ -139,7 +140,7 @@ const empIdArray = [];
       }
 
       function Internfn(){
-          
+
         inquirer.prompt([
           {
              type: "input",
@@ -176,3 +177,68 @@ const empIdArray = [];
              console.log(err);
        });
       }
+
+    //   function output(){
+    //     fs.writeFileSync(outputPath,  render(arr), function(err) {
+    //       if (err) {
+    //         return console.log(err);
+    //       }
+    //     });
+    //   }
+
+      //-----------------the following validation system is credited to Yakini-------------
+      function answerValidation(value){
+        if(value!="" && value.match('[a-zA-Z][a-zA-Z]+$'))return true;
+        else return `Please enter valid detail`;
+      };
+ 
+      function idValidation(value){
+      const pass = value.match(/^[1-9]\d*$/);
+    //  console.log(pass);
+      if (pass) {
+      
+          if(idArr.includes(value)){
+            return "Please select different ID..Already in Use!!";
+          }else{ 
+            return true;
+          };
+    }else return "Please enter valid number.";
+  };
+    
+     // To validate whether phNo is correct . If not, return 'Please enter valid office number' message
+     function phNoValidation(value){
+      const id = /^[1-9]\d*$/;
+     
+      if (value.match(id)) {
+        return true;
+      }
+      return "Please enter valid office number.";
+    }
+
+    //To validate whether the email entered is correct. If not, return 'Please enter valid email' message
+    function emailValidation(value){
+
+      var mailformat = /\S+@\S+\.\S+/;
+      if(value.match(mailformat))
+       return true;
+     
+      else
+      return `Please enter valid email`;
+    }
+
+    //To validate the GitHub account. If not valid, return 'Invalid user message'
+   async function gitHubValidation(value){
+ 
+      const queryUrl = `https://api.github.com/users/${value}`;
+      try{
+       const response = await axios.get(queryUrl);
+        if(response.status === 200){
+          return true;
+        }
+      }catch (error) {
+        return `Invalid User`;
+        
+      };
+      }
+    
+      Managerfn();
